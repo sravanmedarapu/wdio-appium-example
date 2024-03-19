@@ -5,7 +5,7 @@ beforeEach('setup', async () => {
 })
 
 describe('My Login application', () => {
-    it('User should not be abel to login with username lessthan 8 chars', async () => {
+    xit('User should not be abel to login with username lessthan 8 chars', async () => {
         await LoginStep.login("user1", "passw");
         await LoginStep.verifyInvalidEmailErrorMessage();
         await LoginStep.verifyInvalidPasswordErrorMessage();

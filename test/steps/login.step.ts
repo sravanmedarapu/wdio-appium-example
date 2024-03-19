@@ -10,13 +10,13 @@ class LoginSteps {
     }
     
     async login(username: string, password: string) {
-        await LoginPage.username(username)
-        await LoginPage.password(password)
+        await LoginPage.typeUsername(username)
+        await LoginPage.typePassword(password)
         await LoginPage.tapLoginButton()
     }
 
     async verifyInvalidEmailErrorMessage() {
-        await expect(LoginPage.invalidEmailErrorMSG).toBeDisplayed()
+         await expect(LoginPage.invalidEmailErrorMSG).toBeDisplayed()
     }
 
     async verifyInvalidPasswordErrorMessage() {
@@ -24,13 +24,13 @@ class LoginSteps {
     }
 
     async verifySuccessfullLoginAlertDisplayed() {
-        await expect(LoginPage.successfulLoginAlert).toBeDisplayed()
+        await expect(await LoginPage.isLoginSuccessfullAleterDisplayed()).toBe(true)
     }
 
     async verifyAlertDisapperAfterAccepting() {
-        expect(await LoginPage.okButton).toBeDisplayed()
+        await LoginPage.isOkButtonDisplayed(true)
         await LoginPage.tapOnOkButton();
-        await expect(LoginPage.okButton).not.toBeDisplayed()
+        await LoginPage.isOkButtonDisplayed(false)
     }
 }
 

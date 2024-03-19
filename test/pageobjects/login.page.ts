@@ -10,11 +10,11 @@ class LoginPage extends Page {
         return $("//android.widget.TextView[@text='Login / Sign up Form']")
     }
 
-    public async username(username: string) {
+    public async typeUsername(username: string) {
         await $('~input-email').setValue(username);
     }
 
-    async password(password: string) {
+    async typePassword(password: string) {
         await $('~input-password').setValue(password);
     }
 
@@ -29,12 +29,18 @@ class LoginPage extends Page {
         return $('//android.widget.Button[@text="OK"]')
     }
 
-     get successfulLoginAlert() {
-        return $("//android.widget.TextView[@text='You are logged in!']")
+     async isLoginSuccessfullAleterDisplayed(): Promise<Boolean> {
+        return  await $("//android.widget.TextView[@text='You are logged in!']").waitForDisplayed()
     }
 
     async tapOnOkButton() {
         await this.okButton.click();
+    }
+    async isOkButtonDisplayed(isShown: boolean) {
+       return await this.okButton.waitForDisplayed( { 
+        reverse:!isShown,
+        timeout: 1000
+    })
     }
 }
 
